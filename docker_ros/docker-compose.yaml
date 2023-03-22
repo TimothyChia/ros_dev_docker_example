@@ -1,0 +1,36 @@
+# incomplete!
+# https://github.com/compose-spec/compose-spec/blob/master/spec.md
+
+version: "3.8"
+services:
+  dev:
+    build: 
+      context: .
+      # args:
+    volumes:
+      - ..:/ext-code
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /mnt/wslg:/mnt/wslg
+      - /usr/lib/wsl:/usr/lib/wsl
+    environment:
+      - DISPLAY
+      - WAYLAND_DISPLAY
+      - XDG_RUNTIME_DIR
+      - PULSE_SERVER
+      - LD_LIBRARY_PATH=/usr/lib/wsl/lib
+    devices:
+      - /dev/dxg:/dev/dxg
+    tty: true # seems to be enough to keep this running if you launch in detached mode.
+    network_mode: "host"
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  # stdin_open: true
+  # ports:
+  # - 11311:11311 # this is enough to do rostopic list from your host, but not really much else.
