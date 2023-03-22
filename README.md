@@ -28,6 +28,10 @@ A small template or example to show how to create reproducible environments for 
   - an example Docker setup that was used for another repository
   - this will probably have tons of instructions and dependencies that you do not need for your particular project
   - and will be missing dependencies that you do need
+  - note that this Dockerfile uses 
+     ``` FROM osrf/ros:noetic-desktop-full ```
+    - Which means that it will be Ubuntu 20.04 and ROS Noetic inside.
+    - You can use a different base if you require different OS or ROS
 
 ## Quick Start
 - prepare your environment. 
